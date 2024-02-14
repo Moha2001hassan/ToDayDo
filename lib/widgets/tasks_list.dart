@@ -10,6 +10,7 @@ class TasksList extends StatelessWidget {
       children: const [
         TaskTile(),
         TaskTile(),
+        TaskTile(),
       ],
     );
   }

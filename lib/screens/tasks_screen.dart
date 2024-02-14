@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/task.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
 
@@ -10,6 +11,12 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: "go to sleep"),
+    Task(name: "go to university"),
+    Task(name: "pay gifts"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +30,14 @@ class _TasksScreenState extends State<TasksScreen> {
               context: context,
               builder: (context) => SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: const AddTaskScreen()
-                  )
-              ),
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: AddTaskScreen(addTaskCallback: (newTaskTitle) {
+                        setState(() {
+                          tasks.add(Task(name: newTaskTitle));
+                          Navigator.pop(context);
+                        });
+                      }))),
             );
           },
           backgroundColor: Colors.indigo[400],
@@ -46,31 +57,34 @@ class _TasksScreenState extends State<TasksScreen> {
                 IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.playlist_add_check,
-                        size: 40, color: Colors.white)),
-                const SizedBox(width: 15),
+                        size: 45, color: Colors.white)),
+                const SizedBox(width: 8),
                 const Text(
                   "ToDayDo",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 35,
+                      fontSize: 32,
                       fontWeight: FontWeight.bold),
                 )
               ],
             ),
-            const Text(
-              "4 Tasks",
-              style: TextStyle(
+            const SizedBox(height: 10),
+            Text(
+              "${tasks.length} Tasks",
+              style: const TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 16,
+                fontWeight: FontWeight.bold
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Expanded(
               child: Container(
+                alignment: Alignment.topCenter,
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: const TasksList(),
+                child: TasksList(tasks: tasks),
               ),
             )
           ],

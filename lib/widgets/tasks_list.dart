@@ -4,44 +4,30 @@ import 'package:flutter/material.dart';
 import '../models/task.dart';
 
 class TasksList extends StatefulWidget {
-  const TasksList({super.key});
+  final List<Task> tasks;
+  const TasksList({super.key, required this.tasks});
 
   @override
   State<TasksList> createState() => _TasksListState();
 }
 
 class _TasksListState extends State<TasksList> {
-  List<Task> tasks = [
-    Task(name: "go to sleep"),
-    Task(name: "go to university"),
-    Task(name: "pay gifts"),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: tasks.length,
+      itemCount: widget.tasks.length,
       itemBuilder: (context, index) {
         return TaskTile(
-          taskTitle: tasks[index].name,
-          isChecked: tasks[index].isDone,
+          taskTitle: widget.tasks[index].name,
+          isChecked: widget.tasks[index].isDone,
           checkBoxChange:(newValue){
             setState(() {
-              tasks[index].doneChanged();
-              //isChecked = newValue;
+              widget.tasks[index].doneChanged();
             });
           }
         );
       },
-      // children: [
-      //   TaskTile(
-      //     taskTitle: tasks[1].name,
-      //     isChecked: tasks[1].isDone,
-      //   ),
-      //   TaskTile(
-      //     taskTitle: tasks[2].name,
-      //     isChecked: tasks[2].isDone,
-      //   ),
     );
   }
 }

@@ -16,7 +16,7 @@ class TaskTile extends StatelessWidget {
               decoration: isChecked ? TextDecoration.lineThrough : null),
         ),
         trailing: Checkbox(
-          activeColor: Colors.teal[400],
+          activeColor: const Color(0xff37657c),
           value: isChecked,
           onChanged: checkBoxChange,
         ));

@@ -12,4 +12,9 @@ class TaskData extends ChangeNotifier {
     tasks.add(Task(name: newTaskTitle));
     notifyListeners();
   }
+
+  void updateTask(Task task) {
+    task.doneChanged();
+    notifyListeners();
+  }
 }

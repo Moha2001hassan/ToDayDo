@@ -30,13 +30,11 @@ class TasksScreen extends StatelessWidget {
                       }))),
             );
           },
-          // backgroundColor: Colors.indigo[400],
           backgroundColor: const Color(0xff37657c),
           shape: const CircleBorder(),
           child: const Icon(Icons.add, color: Colors.white),
         ),
       ),
-      // backgroundColor: Colors.teal[400],
       backgroundColor: const Color(0xFF88a3b1),
       body: Container(
         padding:
@@ -76,7 +74,7 @@ class TasksScreen extends StatelessWidget {
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: TasksList(),
+                child: const TasksList(),
               ),
             )
           ],

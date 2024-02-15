@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/task.dart';
+import 'package:provider/provider.dart';
+import '../models/task_data.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
-
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: "go to sleep"),
-    Task(name: "go to university"),
-    Task(name: "pay gifts"),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +23,21 @@ class _TasksScreenState extends State<TasksScreen> {
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: AddTaskScreen(addTaskCallback: (newTaskTitle) {
-                        setState(() {
-                          tasks.add(Task(name: newTaskTitle));
-                          Navigator.pop(context);
-                        });
+                        // setState(() {
+                        //   tasks.add(Task(name: newTaskTitle));
+                        //   Navigator.pop(context);
+                        // });
                       }))),
             );
           },
-          backgroundColor: Colors.indigo[400],
+          // backgroundColor: Colors.indigo[400],
+          backgroundColor: const Color(0xff37657c),
           shape: const CircleBorder(),
           child: const Icon(Icons.add, color: Colors.white),
         ),
       ),
-      backgroundColor: Colors.teal[400],
+      // backgroundColor: Colors.teal[400],
+      backgroundColor: const Color(0xFF88a3b1),
       body: Container(
         padding:
             const EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 80),
@@ -70,7 +62,7 @@ class _TasksScreenState extends State<TasksScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              "${tasks.length} Tasks",
+              "${Provider.of<TaskData>(context).tasks.length} Tasks",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -84,7 +76,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: TasksList(tasks: tasks),
+                child: TasksList(),
               ),
             )
           ],
